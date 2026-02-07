@@ -8,6 +8,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import HistGradientBoostingClassifier
+from xgboost import XGBClassifier
 
 
 @dataclass(frozen=True)
@@ -57,6 +58,24 @@ def build_model(spec: ModelSpec) -> Pipeline:
                 max_depth=6,
                 max_iter=400,
                 random_state=0,
+            )),
+        ])
+
+    if spec.name == "xgb":
+        # XGBoost handles unscaled numeric features well.
+        return Pipeline(steps=[
+            ("pre", _preprocess(scale_numeric=False)),
+            ("clf", XGBClassifier(
+                n_estimators=500,
+                max_depth=6,
+                learning_rate=0.05,
+                subsample=0.8,
+                colsample_bytree=0.8,
+                objective="binary:logistic",
+                eval_metric="auc",
+                tree_method="hist",
+                random_state=0,
+                n_jobs=-1,
             )),
         ])
 
