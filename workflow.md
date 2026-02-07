@@ -29,17 +29,17 @@
 git checkout main
 git pull origin main
 git checkout -b your-name
+git merge main
 
 # during work
 git add .
 git commit -m "Your message"
 
 # push and sync with main
-git push -u origin your-name
+git push -u origin your-name # or "git push" at your own branch
 git checkout main
-git pull origin main
-git checkout your-name
-git merge main
+git merge your-name
+git push origin main
 ```
 
 ### Colab Workflow
