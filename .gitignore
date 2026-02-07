@@ -1,0 +1,28 @@
+# Latex
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+*.nav
+*.snm
+
+# jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# editor files
+.vscode/
+.idea/
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+ENV/
