@@ -4,3 +4,11 @@ This is the repository for our mini project 1. We will build a songs classifier 
 
 ## Workflow
 If you are one of the team members, please refer to [workflow.md](workflow.md) for instructions on how to work with this repository.
+
+## Run
+
+### Terminal
+To run the code in terminal, please follow the instructions below:
+```bash
+python -m scripts.train_cv
+```
