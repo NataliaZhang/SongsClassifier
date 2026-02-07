@@ -21,7 +21,7 @@
   - Natalia Zhang: `nataz`
   - Chengrui Qu:
   - Chengyi Liu:
-  - Mengzhan Liufu:
+  - Mengzhan Liufu: `mliufu`
 
 ### Basic Github Workflow
 ```bash
