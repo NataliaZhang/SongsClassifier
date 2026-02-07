@@ -36,10 +36,11 @@ git add .
 git commit -m "Your message"
 
 # push and sync with main
-git push -u origin your-name # or "git push" at your own branch
+git push    # at your own branch
 git checkout main
+git pull    # from main branch
 git merge your-name
-git push origin main
+git push    # at main branch
 ```
 
 ### Colab Workflow
