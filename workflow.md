@@ -46,11 +46,10 @@ git push origin main
 First cell in Colab:
 ```python
 # Clone the repo (only first time)
-!git clone git@github.com:NataliaZhang/SongsClassifier.git
+!git clone https://github.com/NataliaZhang/SongsClassifier.git
 %cd SongsClassifier
 !pip install -r requirements.txt
-
-# if already cloned, just pull the latest changes
-%cd SongsClassifier
-!git pull origin main
 ```
+
+Example figure saving notebook in google colab and pushing to Github:
+![image](img/colab_to_github.png)
