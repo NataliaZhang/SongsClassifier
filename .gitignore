@@ -10,6 +10,7 @@
 *.blg
 *.nav
 *.snm
+latex/project1_template.pdf
 
 # jupyter notebook checkpoints
 .ipynb_checkpoints/
