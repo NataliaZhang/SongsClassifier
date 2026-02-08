@@ -9,6 +9,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import HistGradientBoostingClassifier
 from xgboost import XGBClassifier
+from catboost import CatBoostClassifier
 
 
 @dataclass(frozen=True)
@@ -76,6 +77,21 @@ def build_model(spec: ModelSpec) -> Pipeline:
                 tree_method="hist",
                 random_state=0,
                 n_jobs=-1,
+            )),
+        ])
+
+    if spec.name == "cat":
+        return Pipeline(steps=[
+            ("pre", _preprocess(scale_numeric=False)),
+            ("clf", CatBoostClassifier(
+                iterations=2000,
+                learning_rate=0.03,
+                depth=6,
+                l2_leaf_reg=3.0,
+                loss_function="Logloss",
+                eval_metric="AUC",
+                random_seed=0,
+                verbose=False,
             )),
         ])
 
