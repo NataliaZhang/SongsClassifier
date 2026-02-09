@@ -11,6 +11,8 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 from xgboost import XGBClassifier
 from catboost import CatBoostClassifier
 
+import numpy as np
+from sklearn.preprocessing import FunctionTransformer
 
 @dataclass(frozen=True)
 class ModelSpec:
@@ -67,16 +69,20 @@ def build_model(spec: ModelSpec) -> Pipeline:
         return Pipeline(steps=[
             ("pre", _preprocess(scale_numeric=False)),
             ("clf", XGBClassifier(
-                n_estimators=500,
-                max_depth=6,
-                learning_rate=0.05,
-                subsample=0.8,
-                colsample_bytree=0.8,
+                n_estimators=2000,
+                max_depth=7,
+                learning_rate=0.03,
+                subsample=0.7,
+                colsample_bytree=0.7,
+                min_child_weight=1,
+                gamma=0.1,
+                reg_lambda=3.0,
                 objective="binary:logistic",
                 eval_metric="auc",
                 tree_method="hist",
                 random_state=0,
                 n_jobs=-1,
+                max_delta_step=1,
             )),
         ])
 

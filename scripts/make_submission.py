@@ -12,7 +12,7 @@ def main():
     X, y, X_test = load_train_test(paths)
 
     # Pick your current best
-    model = build_model(ModelSpec(name="cat"))
+    model = build_model(ModelSpec(name="xgb"))
     model = fit_full(model, X, y)
 
     p_test = predict_proba_1(model, X_test)
