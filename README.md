@@ -27,3 +27,7 @@ To run the code in terminal, please follow the instructions below:
 python -m scripts.train_cv
 python -m scripts.make_submission
 ```
+
+### Jupyter Notebook
+To quickly run the code in Jupyter Notebook, please open the `notebooks/setup.ipynb` notebook and run the cells in order.
+To follow our colab demo in Jupyter Notebook, please open the `notebooks/colab_demo.ipynb` notebook. We put the dataset analysis and model tuning code in this notebook.

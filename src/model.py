@@ -65,7 +65,7 @@ def build_model(spec: ModelSpec, scale_pos_weight: float = None) -> Pipeline:
         return Pipeline(steps=[
             ("pre", _preprocess(scale_numeric=False)),
             ("clf", XGBClassifier(
-                n_estimators=1200,
+                n_estimators=2000,
                 max_depth=5,    # default 7
                 learning_rate=0.03,
                 subsample=0.7,
