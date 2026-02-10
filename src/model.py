@@ -15,7 +15,6 @@ from xgboost import XGBClassifier
 class ModelSpec:
     name: str  # "logreg" or "hgb"
 
-
 def _preprocess(scale_numeric: bool) -> ColumnTransformer:
     num_pipe_steps = [
         ("imputer", SimpleImputer(strategy="median")),
@@ -41,7 +40,7 @@ def _preprocess(scale_numeric: bool) -> ColumnTransformer:
     return pre
 
 
-def build_model(spec: ModelSpec) -> Pipeline:
+def build_model(spec: ModelSpec, scale_pos_weight: float = None) -> Pipeline:
     if spec.name == "logreg":
         return Pipeline(steps=[
             ("pre", _preprocess(scale_numeric=True)),
@@ -66,11 +65,17 @@ def build_model(spec: ModelSpec) -> Pipeline:
         return Pipeline(steps=[
             ("pre", _preprocess(scale_numeric=False)),
             ("clf", XGBClassifier(
-                n_estimators=500,
-                max_depth=6,
-                learning_rate=0.05,
-                subsample=0.8,
+                n_estimators=1200,
+                max_depth=5,    # default 7
+                learning_rate=0.03,
+                subsample=0.7,
                 colsample_bytree=0.8,
+                min_child_weight=3, # default 1; higher values can help with imbalanced data.
+                gamma=0.05,  # default 0.1
+                reg_lambda=10.0,
+                reg_alpha=0.6,
+                max_delta_step=0,
+                scale_pos_weight=scale_pos_weight,
                 objective="binary:logistic",
                 eval_metric="auc",
                 tree_method="hist",
@@ -78,5 +83,5 @@ def build_model(spec: ModelSpec) -> Pipeline:
                 n_jobs=-1,
             )),
         ])
-
+    
     raise ValueError(f"Unknown model spec: {spec.name}")

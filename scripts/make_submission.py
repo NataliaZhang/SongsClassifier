@@ -11,8 +11,13 @@ def main():
     paths = Paths()
     X, y, X_test = load_train_test(paths)
 
+    # Compute scale_pos_weight for XGBoost, which helps with class imbalance.
+    n_pos = int((y == 1).sum())
+    n_neg = int((y == 0).sum())
+    scale_pos_weight = (n_neg / max(n_pos, 1))
+
     # Pick your current best
-    model = build_model(ModelSpec(name="hgb"))
+    model = build_model(ModelSpec(name="xgb"), scale_pos_weight)
     model = fit_full(model, X, y)
 
     p_test = predict_proba_1(model, X_test)
@@ -26,6 +31,7 @@ def main():
     out_path = os.path.join(paths.output_dir, paths.submission_csv)
     sub.to_csv(out_path, index=False)
     print(f"Wrote: {out_path}")
+
 
 if __name__ == "__main__":
     main()
