@@ -22,12 +22,12 @@ python -m pipreqs.pipreqs . --force
 ## Run
 
 ### Terminal
-To run the code in terminal, please follow the instructions below:
+To quickly run the code in terminal, please follow the instructions below:
 ```bash
 python -m scripts.train_cv
 python -m scripts.make_submission
 ```
+This gives a reliable model on the dataset, but to get the best performance, you may want to see our colab demo for a best model.
 
 ### Jupyter Notebook
-To quickly run the code in Jupyter Notebook, please open the `notebooks/setup.ipynb` notebook and run the cells in order.
 To follow our colab demo in Jupyter Notebook, please open the `notebooks/colab_demo.ipynb` notebook. We put the dataset analysis and model tuning code in this notebook.
